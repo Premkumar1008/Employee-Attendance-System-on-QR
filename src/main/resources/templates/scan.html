@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Scan QR - Attendance System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Scan QR Code</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/employees">Employees</a>
+        <a href="/attendance">Attendance</a>
+    </nav>
+
+    <section>
+        <p>Scan the QR code with a QR scan app, then paste the scanned value into the attendance page to mark presence.</p>
+        <p>Example QR payload: <code>ATTENDANCE:E001</code></p>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Attendance - Attendance System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Attendance</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/employees">Employees</a>
+        <a href="/scan">Scan QR</a>
+    </nav>
+
+    <div th:if="${error}" class="alert error" th:text="${error}"></div>
+    <div th:if="${success}" class="alert success" th:text="${success}"></div>
+
+    <section>
+        <h2>Mark Attendance</h2>
+        <form action="/attendance/mark" method="post">
+            <label>QR Payload</label>
+            <input type="text" name="qrText" th:value="${code}" placeholder="ATTENDANCE:E001" required />
+            <button type="submit">Mark Present</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Attendance History</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Employee Code</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="record : ${attendanceRecords}">
+                <td th:text="${record.employee.employeeCode}"></td>
+                <td th:text="${record.employee.name}"></td>
+                <td th:text="${record.status}"></td>
+                <td th:text="${#temporals.format(record.timestamp, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Employees - Attendance System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Employees</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/scan">Scan QR</a>
+    </nav>
+
+    <div th:if="${error}" class="alert error" th:text="${error}"></div>
+    <div th:if="${success}" class="alert success" th:text="${success}"></div>
+
+    <section>
+        <h2>Register Employee</h2>
+        <form action="/employees/add" method="post">
+            <label>Employee Code</label>
+            <input type="text" name="employeeCode" placeholder="E004" required />
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Name" required />
+            <label>Role</label>
+            <input type="text" name="role" placeholder="Role" required />
+            <button type="submit">Add Employee</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Employee List</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>QR Code</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.employeeCode}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.role}"></td>
+                <td><a th:href="@{/employees/qr(code=${employee.employeeCode})}">Show QR</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section th:if="${qrImage}">
+        <h2>QR Code for <span th:text="${employee.name}"></span></h2>
+        <img th:src="${qrImage}" alt="Employee QR Code" />
+    </section>
+</div>
+</body>
+</html>

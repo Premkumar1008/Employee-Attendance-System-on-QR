@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Employee Attendance System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Employee Attendance System</h1>
+    <nav>
+        <a href="/employees">Employees</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/scan">Scan QR</a>
+    </nav>
+
+    <section>
+        <h2>Employees</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Employee Code</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>QR</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.employeeCode}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.role}"></td>
+                <td><a th:href="@{/employees/qr(code=${employee.employeeCode})}">Show QR</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>
