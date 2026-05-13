@@ -1,0 +1,11 @@
+.git
+.gitignore
+.vscode
+.tools
+target
+*.log
+*.txt
+node_modules
+.DS_Store
+.env
+.env.local
